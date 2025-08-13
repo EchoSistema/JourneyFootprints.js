@@ -1,0 +1,19 @@
+{
+  "name": "journey-footprints",
+  "version": "0.1.0",
+  "description": "Lightweight tracking library for capturing session and UTM data.",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --dts --format cjs,esm,iife --global-name JourneyFootprints",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["tracking", "utm", "session"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.0"
+  }
+}
