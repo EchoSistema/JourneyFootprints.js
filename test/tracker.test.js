@@ -2,6 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert';
 import { createFootprints } from '../dist/index.js';
 
+const PUBLIC_KEY = 'f246f177-c795-390b-af95-39b0dd01a7fb';
+const ENDPOINT = 'https://dev.micros.services/api/v1/footprints';
+const EVENT = 'register_event';
+
 test('tracks events with fake data', async () => {
   const calls = [];
   const fakeFetch = async (_url, options) => {
@@ -31,20 +35,22 @@ test('tracks events with fake data', async () => {
   assert.strictEqual(tracker.getSessionId(), 'session-456');
 });
 
-test('includes public key header when provided', async () => {
-  const headers = [];
-  const fakeFetch = async (_url, options) => {
-    headers.push(options.headers);
+test('returns request status using dev endpoint', async () => {
+  const calls = [];
+  const fakeFetch = async (url, options) => {
+    calls.push({ url, headers: options.headers });
     return { ok: true, status: 200, headers: { get: () => null } };
   };
 
   const tracker = createFootprints({
-    endpoint: 'https://example.com',
-    publicKey: 'pub-key-123',
+    endpoint: ENDPOINT,
+    publicKey: PUBLIC_KEY,
     fetchImpl: fakeFetch
   });
 
-  await tracker.track('test');
+  const result = await tracker.track(EVENT);
 
-  assert.strictEqual(headers[0]['X-PUBLIC-KEY'], 'pub-key-123');
+  assert.strictEqual(calls[0].url, ENDPOINT);
+  assert.strictEqual(calls[0].headers['X-PUBLIC-KEY'], PUBLIC_KEY);
+  assert.strictEqual(result.status, 200);
 });
