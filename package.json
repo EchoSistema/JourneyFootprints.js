@@ -5,9 +5,10 @@
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "scripts": {
+    "scripts": {
     "build": "tsup src/index.ts --dts --format cjs,esm,iife --global-name JourneyFootprints",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test": "node --test"
   },
   "keywords": ["tracking", "utm", "session"],
   "author": "",
