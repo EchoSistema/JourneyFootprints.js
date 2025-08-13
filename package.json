@@ -10,18 +10,16 @@
     "prepublishOnly": "npm run build",
     "test": "node --test"
   },
-  "keywords": [
-    "tracking",
-    "utm",
-    "session"
-  ],
+  "keywords": ["tracking", "utm", "session"],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "tsup": "^8.5.0",
-    "typescript": "^5.2.0"
+    "typescript": "^5.9.2"
   },
-  "overrides": {
-    "source-map": "^0.7.6"
+  "pnpm": {
+    "overrides": {
+      "source-map": "^0.7.4"
+    }
   }
 }
