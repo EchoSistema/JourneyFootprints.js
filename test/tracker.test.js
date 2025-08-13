@@ -30,3 +30,21 @@ test('tracks events with fake data', async () => {
   assert.strictEqual(calls[0].user, 'user-123');
   assert.strictEqual(tracker.getSessionId(), 'session-456');
 });
+
+test('includes public key header when provided', async () => {
+  const headers = [];
+  const fakeFetch = async (_url, options) => {
+    headers.push(options.headers);
+    return { ok: true, status: 200, headers: { get: () => null } };
+  };
+
+  const tracker = createFootprints({
+    endpoint: 'https://example.com',
+    publicKey: 'pub-key-123',
+    fetchImpl: fakeFetch
+  });
+
+  await tracker.track('test');
+
+  assert.strictEqual(headers[0]['X-PUBLIC-KEY'], 'pub-key-123');
+});
