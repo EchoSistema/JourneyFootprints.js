@@ -7,6 +7,7 @@ export interface FootprintsOptions {
   endpoint?: string;
   sessionId?: string | null;
   user?: string;
+  publicKey?: string;
   utmSource?: string;
   utmMedium?: string;
   utmCampaign?: string;
@@ -35,6 +36,7 @@ export function createFootprints(options: FootprintsOptions = {}): Tracker {
   const fetchFn = options.fetchImpl ?? (typeof fetch !== "undefined" ? fetch : undefined);
   let sessionId = options.sessionId ?? null;
   let user = options.user ?? "";
+  const publicKey = options.publicKey ?? "";
 
   const utm = {
     source: options.utmSource ?? getQuery("utm_source"),
@@ -50,9 +52,11 @@ export function createFootprints(options: FootprintsOptions = {}): Tracker {
     if (!fetchFn) return { ok: false, status: 0 };
     const payload = { event, user, sessionId, language, utm, ...data };
     try {
+      const headers: Record<string, string> = { "Content-Type": "application/json" };
+      if (publicKey) headers["X-PUBLIC-KEY"] = publicKey;
       const res = await fetchFn(endpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers,
         body: JSON.stringify(payload)
       });
       const corr = res.headers?.get("X-Correlation-Id");

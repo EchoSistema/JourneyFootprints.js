@@ -6,6 +6,7 @@ interface FootprintsOptions {
     endpoint?: string;
     sessionId?: string | null;
     user?: string;
+    publicKey?: string;
     utmSource?: string;
     utmMedium?: string;
     utmCampaign?: string;
@@ -29,4 +30,4 @@ declare const _default: {
     createFootprints: typeof createFootprints;
 };
 
-export { FootprintsOptions, TrackResult, Tracker, createFootprints, _default as default };
+export { type FootprintsOptions, type TrackResult, type Tracker, createFootprints, _default as default };

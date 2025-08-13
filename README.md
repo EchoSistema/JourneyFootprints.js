@@ -1,106 +1,6 @@
 # JourneyFootprints.js
 
-> Português | [English](#english) | [Español](#español)
-
-## Português
-
-Biblioteca JavaScript leve focada na captura de dados de sessão e parâmetros UTM. Ela roda no navegador e pode ser consumida via CDN ou instalada com npm, pnpm ou yarn.
-
-### Recursos
-
-- Captura `sessionId`, `user` e idioma
-- Lê parâmetros UTM da URL ou os aceita explicitamente
-- Envia eventos para um endpoint configurável
-- Pequeno e agnóstico de framework
-
-### Instalação
-
-```bash
-npm install journey-footprints
-# ou
-pnpm add journey-footprints
-# ou
-yarn add journey-footprints
-```
-
-#### CDN
-
-```html
-<script src="https://unpkg.com/journey-footprints/dist/index.global.js"></script>
-<script>
-  const tracker = JourneyFootprints.createFootprints({ user: '42' });
-  tracker.track('page-view');
-</script>
-```
-
-## Uso
-
-### React
-
-```jsx
-import { createFootprints } from 'journey-footprints';
-
-const tracker = createFootprints({ user: '42' });
-tracker.track('page-view');
-```
-
-### Vue
-
-```js
-import { createFootprints } from 'journey-footprints';
-
-export default {
-  setup() {
-    const tracker = createFootprints();
-    tracker.track('page-view');
-  }
-};
-```
-
-### Svelte
-
-```svelte
-<script>
-  import { createFootprints } from 'journey-footprints';
-  const tracker = createFootprints();
-  tracker.track('page-view');
-</script>
-```
-
-## API
-
-```ts
-createFootprints(options?: {
-  endpoint?: string;
-  sessionId?: string | null;
-  user?: string;
-  utmSource?: string;
-  utmMedium?: string;
-  utmCampaign?: string;
-  utmTerm?: string;
-  utmContent?: string;
-  language?: string;
-})
-```
-
-Retorna um rastreador com métodos:
-
-- `track(event, data?)` – envia um evento
-- `setUser(user)`
-- `setSessionId(sessionId)`
-- `getSessionId()`
-
-O idioma padrão é o do navegador quando não informado.
-
-## Testes com dados fictícios
-
-```bash
-npm test
-```
-
-Os testes utilizam uma implementação fictícia de `fetch` para validar o envio de eventos sem depender de um servidor real.
-
----
+> English | [Português](#português) | [Español](#español)
 
 ## English
 
@@ -144,17 +44,21 @@ const tracker = createFootprints({ user: '42' });
 tracker.track('page-view');
 ```
 
-#### Vue
+#### Vue (Composition API)
 
-```js
+Use the tracker inside Vue's Composition API by creating it within a `<script setup>` block and tracking events on a lifecycle hook:
+
+```vue
+<script setup>
 import { createFootprints } from 'journey-footprints';
+import { onMounted } from 'vue';
 
-export default {
-  setup() {
-    const tracker = createFootprints();
-    tracker.track('page-view');
-  }
-};
+const tracker = createFootprints();
+
+onMounted(() => {
+  tracker.track('page-view');
+});
+</script>
 ```
 
 #### Svelte
@@ -192,6 +96,61 @@ Returns a tracker with methods:
 
 Language defaults to the browser language when not provided.
 
+### Event list
+
+Common events you can track include:
+
+- `first_visit`
+- `session_start`
+- `user_engagement`
+- `page_view`
+- `scroll`
+- `click`
+- `file_download`
+- `video_start`
+- `video_progress`
+- `video_complete`
+- `view_search_results`
+- `add_payment_info`
+- `add_shipping_info`
+- `add_to_cart`
+- `add_to_wishlist`
+- `begin_checkout`
+- `purchase`
+- `refund`
+- `remove_from_cart`
+- `select_item`
+- `select_promotion`
+- `view_cart`
+- `view_item`
+- `view_item_list`
+- `view_promotion`
+- `generate_lead`
+- `qualify_lead`
+- `disqualify_lead`
+- `working_lead`
+- `close_convert_lead`
+- `close_unconvert_lead`
+- `sign_up`
+- `tutorial_begin`
+- `tutorial_complete`
+- `login`
+- `logout`
+- `form_submission`
+- `button_click`
+- `modal_open`
+- `lightbox_open`
+- `video_play`
+- `input_focus`
+- `tooltip_click`
+- `ad_view`
+- `ad_click`
+- `apply_job`
+- `contact`
+- `lead`
+- `register_event`
+- `emailCapture`
+
 ### Testing with fake data
 
 ```bash
@@ -199,6 +158,165 @@ npm test
 ```
 
 The tests use a fake `fetch` implementation to validate event delivery without relying on a real server.
+
+---
+
+## Português
+
+Biblioteca JavaScript leve focada na captura de dados de sessão e parâmetros UTM. Ela roda no navegador e pode ser consumida via CDN ou instalada com npm, pnpm ou yarn.
+
+### Recursos
+
+- Captura `sessionId`, `user` e idioma
+- Lê parâmetros UTM da URL ou os aceita explicitamente
+- Envia eventos para um endpoint configurável
+- Pequeno e agnóstico de framework
+
+### Instalação
+
+```bash
+npm install journey-footprints
+# ou
+pnpm add journey-footprints
+# ou
+yarn add journey-footprints
+```
+
+#### CDN
+
+```html
+<script src="https://unpkg.com/journey-footprints/dist/index.global.js"></script>
+<script>
+  const tracker = JourneyFootprints.createFootprints({ user: '42' });
+  tracker.track('page-view');
+</script>
+```
+
+## Uso
+
+### React
+
+```jsx
+import { createFootprints } from 'journey-footprints';
+
+const tracker = createFootprints({ user: '42' });
+tracker.track('page-view');
+```
+
+### Vue (API de Composição)
+
+Use o tracker com a API de Composição do Vue criando-o dentro de um bloco `<script setup>` e rastreando eventos em um hook de ciclo de vida:
+
+```vue
+<script setup>
+import { createFootprints } from 'journey-footprints';
+import { onMounted } from 'vue';
+
+const tracker = createFootprints();
+
+onMounted(() => {
+  tracker.track('page-view');
+});
+</script>
+```
+
+### Svelte
+
+```svelte
+<script>
+  import { createFootprints } from 'journey-footprints';
+  const tracker = createFootprints();
+  tracker.track('page-view');
+</script>
+```
+
+## API
+
+```ts
+createFootprints(options?: {
+  endpoint?: string;
+  sessionId?: string | null;
+  user?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  utmTerm?: string;
+  utmContent?: string;
+  language?: string;
+})
+```
+
+Retorna um rastreador com métodos:
+
+- `track(event, data?)` – envia um evento
+- `setUser(user)`
+- `setSessionId(sessionId)`
+- `getSessionId()`
+
+O idioma padrão é o do navegador quando não informado.
+
+### Eventos
+
+Eventos comuns que você pode rastrear incluem:
+
+- `first_visit`
+- `session_start`
+- `user_engagement`
+- `page_view`
+- `scroll`
+- `click`
+- `file_download`
+- `video_start`
+- `video_progress`
+- `video_complete`
+- `view_search_results`
+- `add_payment_info`
+- `add_shipping_info`
+- `add_to_cart`
+- `add_to_wishlist`
+- `begin_checkout`
+- `purchase`
+- `refund`
+- `remove_from_cart`
+- `select_item`
+- `select_promotion`
+- `view_cart`
+- `view_item`
+- `view_item_list`
+- `view_promotion`
+- `generate_lead`
+- `qualify_lead`
+- `disqualify_lead`
+- `working_lead`
+- `close_convert_lead`
+- `close_unconvert_lead`
+- `sign_up`
+- `tutorial_begin`
+- `tutorial_complete`
+- `login`
+- `logout`
+- `form_submission`
+- `button_click`
+- `modal_open`
+- `lightbox_open`
+- `video_play`
+- `input_focus`
+- `tooltip_click`
+- `ad_view`
+- `ad_click`
+- `apply_job`
+- `contact`
+- `lead`
+- `register_event`
+- `emailCapture`
+
+## Testes com dados fictícios
+
+```bash
+npm test
+```
+
+Os testes utilizam uma implementação fictícia de `fetch` para validar o envio de eventos sem depender de um servidor real.
 
 ---
 
@@ -244,17 +362,21 @@ const tracker = createFootprints({ user: '42' });
 tracker.track('page-view');
 ```
 
-#### Vue
+#### Vue (API de composición)
 
-```js
+Utiliza el tracker con la API de composición de Vue creándolo dentro de un bloque `<script setup>` y registrando eventos en un hook de ciclo de vida:
+
+```vue
+<script setup>
 import { createFootprints } from 'journey-footprints';
+import { onMounted } from 'vue';
 
-export default {
-  setup() {
-    const tracker = createFootprints();
-    tracker.track('page-view');
-  }
-};
+const tracker = createFootprints();
+
+onMounted(() => {
+  tracker.track('page-view');
+});
+</script>
 ```
 
 #### Svelte
@@ -291,6 +413,61 @@ Devuelve un rastreador con métodos:
 - `getSessionId()`
 
 El idioma predeterminado es el del navegador cuando no se proporciona.
+
+### Eventos
+
+Eventos comunes que se pueden rastrear incluyen:
+
+- `first_visit`
+- `session_start`
+- `user_engagement`
+- `page_view`
+- `scroll`
+- `click`
+- `file_download`
+- `video_start`
+- `video_progress`
+- `video_complete`
+- `view_search_results`
+- `add_payment_info`
+- `add_shipping_info`
+- `add_to_cart`
+- `add_to_wishlist`
+- `begin_checkout`
+- `purchase`
+- `refund`
+- `remove_from_cart`
+- `select_item`
+- `select_promotion`
+- `view_cart`
+- `view_item`
+- `view_item_list`
+- `view_promotion`
+- `generate_lead`
+- `qualify_lead`
+- `disqualify_lead`
+- `working_lead`
+- `close_convert_lead`
+- `close_unconvert_lead`
+- `sign_up`
+- `tutorial_begin`
+- `tutorial_complete`
+- `login`
+- `logout`
+- `form_submission`
+- `button_click`
+- `modal_open`
+- `lightbox_open`
+- `video_play`
+- `input_focus`
+- `tooltip_click`
+- `ad_view`
+- `ad_click`
+- `apply_job`
+- `contact`
+- `lead`
+- `register_event`
+- `emailCapture`
 
 ### Pruebas con datos ficticios
 
