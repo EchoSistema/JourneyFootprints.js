@@ -5,14 +5,33 @@
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "sideEffects": false,
   "scripts": {
     "build": "tsup src/index.ts --dts --format cjs,esm,iife --global-name JourneyFootprints",
     "prepublishOnly": "npm run build",
     "test": "node --test"
   },
   "keywords": ["tracking", "utm", "session"],
-  "author": "",
+  "author": "EchoSistema",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EchoSistema/JourneyFootprints.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EchoSistema/JourneyFootprints.js/issues"
+  },
+  "homepage": "https://github.com/EchoSistema/JourneyFootprints.js#readme",
+  "unpkg": "dist/index.iife.js",
+  "jsdelivr": "dist/index.iife.js",
   "devDependencies": {
     "tsup": "^8.5.0",
     "typescript": "^5.9.2"
