@@ -25,7 +25,7 @@ yarn add journey-footprints
 <script src="https://unpkg.com/journey-footprints/dist/index.global.js"></script>
 <script>
   const tracker = JourneyFootprints.createFootprints({ user: '42' });
-  tracker.track('pageview');
+  tracker.track('page-view');
 </script>
 ```
 
@@ -37,7 +37,7 @@ yarn add journey-footprints
 import { createFootprints } from 'journey-footprints';
 
 const tracker = createFootprints({ user: '42' });
-tracker.track('pageview');
+tracker.track('page-view');
 ```
 
 ### Vue
@@ -48,7 +48,7 @@ import { createFootprints } from 'journey-footprints';
 export default {
   setup() {
     const tracker = createFootprints();
-    tracker.track('pageview');
+    tracker.track('page-view');
   }
 };
 ```
@@ -59,7 +59,7 @@ export default {
 <script>
   import { createFootprints } from 'journey-footprints';
   const tracker = createFootprints();
-  tracker.track('pageview');
+  tracker.track('page-view');
 </script>
 ```
 
