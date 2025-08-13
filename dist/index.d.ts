@@ -6,6 +6,7 @@ interface FootprintsOptions {
     endpoint?: string;
     sessionId?: string | null;
     user?: string;
+    publicKey?: string;
     utmSource?: string;
     utmMedium?: string;
     utmCampaign?: string;
