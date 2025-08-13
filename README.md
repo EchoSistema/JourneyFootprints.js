@@ -96,6 +96,61 @@ Returns a tracker with methods:
 
 Language defaults to the browser language when not provided.
 
+### Event list
+
+Common events you can track include:
+
+- `first_visit`
+- `session_start`
+- `user_engagement`
+- `page_view`
+- `scroll`
+- `click`
+- `file_download`
+- `video_start`
+- `video_progress`
+- `video_complete`
+- `view_search_results`
+- `add_payment_info`
+- `add_shipping_info`
+- `add_to_cart`
+- `add_to_wishlist`
+- `begin_checkout`
+- `purchase`
+- `refund`
+- `remove_from_cart`
+- `select_item`
+- `select_promotion`
+- `view_cart`
+- `view_item`
+- `view_item_list`
+- `view_promotion`
+- `generate_lead`
+- `qualify_lead`
+- `disqualify_lead`
+- `working_lead`
+- `close_convert_lead`
+- `close_unconvert_lead`
+- `sign_up`
+- `tutorial_begin`
+- `tutorial_complete`
+- `login`
+- `logout`
+- `form_submission`
+- `button_click`
+- `modal_open`
+- `lightbox_open`
+- `video_play`
+- `input_focus`
+- `tooltip_click`
+- `ad_view`
+- `ad_click`
+- `apply_job`
+- `contact`
+- `lead`
+- `register_event`
+- `emailCapture`
+
 ### Testing with fake data
 
 ```bash
@@ -200,6 +255,61 @@ Retorna um rastreador com métodos:
 
 O idioma padrão é o do navegador quando não informado.
 
+### Eventos
+
+Eventos comuns que você pode rastrear incluem:
+
+- `first_visit`
+- `session_start`
+- `user_engagement`
+- `page_view`
+- `scroll`
+- `click`
+- `file_download`
+- `video_start`
+- `video_progress`
+- `video_complete`
+- `view_search_results`
+- `add_payment_info`
+- `add_shipping_info`
+- `add_to_cart`
+- `add_to_wishlist`
+- `begin_checkout`
+- `purchase`
+- `refund`
+- `remove_from_cart`
+- `select_item`
+- `select_promotion`
+- `view_cart`
+- `view_item`
+- `view_item_list`
+- `view_promotion`
+- `generate_lead`
+- `qualify_lead`
+- `disqualify_lead`
+- `working_lead`
+- `close_convert_lead`
+- `close_unconvert_lead`
+- `sign_up`
+- `tutorial_begin`
+- `tutorial_complete`
+- `login`
+- `logout`
+- `form_submission`
+- `button_click`
+- `modal_open`
+- `lightbox_open`
+- `video_play`
+- `input_focus`
+- `tooltip_click`
+- `ad_view`
+- `ad_click`
+- `apply_job`
+- `contact`
+- `lead`
+- `register_event`
+- `emailCapture`
+
 ## Testes com dados fictícios
 
 ```bash
@@ -303,6 +413,61 @@ Devuelve un rastreador con métodos:
 - `getSessionId()`
 
 El idioma predeterminado es el del navegador cuando no se proporciona.
+
+### Eventos
+
+Eventos comunes que se pueden rastrear incluyen:
+
+- `first_visit`
+- `session_start`
+- `user_engagement`
+- `page_view`
+- `scroll`
+- `click`
+- `file_download`
+- `video_start`
+- `video_progress`
+- `video_complete`
+- `view_search_results`
+- `add_payment_info`
+- `add_shipping_info`
+- `add_to_cart`
+- `add_to_wishlist`
+- `begin_checkout`
+- `purchase`
+- `refund`
+- `remove_from_cart`
+- `select_item`
+- `select_promotion`
+- `view_cart`
+- `view_item`
+- `view_item_list`
+- `view_promotion`
+- `generate_lead`
+- `qualify_lead`
+- `disqualify_lead`
+- `working_lead`
+- `close_convert_lead`
+- `close_unconvert_lead`
+- `sign_up`
+- `tutorial_begin`
+- `tutorial_complete`
+- `login`
+- `logout`
+- `form_submission`
+- `button_click`
+- `modal_open`
+- `lightbox_open`
+- `video_play`
+- `input_focus`
+- `tooltip_click`
+- `ad_view`
+- `ad_click`
+- `apply_job`
+- `contact`
+- `lead`
+- `register_event`
+- `emailCapture`
 
 ### Pruebas con datos ficticios
 
