@@ -16,8 +16,7 @@ function createFootprints(options = {}) {
   const language = (_j = options.language) != null ? _j : getLanguage();
   async function track(event, data = {}) {
     var _a2;
-    if (!fetchFn)
-      return { ok: false, status: 0 };
+    if (!fetchFn) return { ok: false, status: 0 };
     const payload = { event, user, sessionId, language, utm, ...data };
     try {
       const res = await fetchFn(endpoint, {
@@ -26,8 +25,7 @@ function createFootprints(options = {}) {
         body: JSON.stringify(payload)
       });
       const corr = (_a2 = res.headers) == null ? void 0 : _a2.get("X-Correlation-Id");
-      if (corr)
-        sessionId = corr;
+      if (corr) sessionId = corr;
       return { ok: res.ok, status: res.status };
     } catch (e) {
       return { ok: false, status: 0 };
@@ -47,17 +45,15 @@ function createFootprints(options = {}) {
   };
 }
 function getQuery(key) {
-  if (typeof location === "undefined")
-    return "";
+  if (typeof location === "undefined") return "";
   return new URLSearchParams(location.search).get(key) || "";
 }
 function getLanguage() {
-  if (typeof navigator === "undefined")
-    return "";
+  if (typeof navigator === "undefined") return "";
   return navigator.language || "";
 }
-var src_default = { createFootprints };
+var index_default = { createFootprints };
 export {
   createFootprints,
-  src_default as default
+  index_default as default
 };
