@@ -29,7 +29,7 @@ yarn add journey-footprints
 <script src="https://unpkg.com/journey-footprints/dist/index.global.js"></script>
 <script>
   const tracker = JourneyFootprints.createFootprints({ user: '42' });
-  tracker.track('page-view');
+  tracker.track('page_view');
 </script>
 ```
 
@@ -41,7 +41,7 @@ yarn add journey-footprints
 import { createFootprints } from 'journey-footprints';
 
 const tracker = createFootprints({ user: '42' });
-tracker.track('page-view');
+tracker.track('page_view');
 ```
 
 #### Vue (Composition API)
@@ -56,7 +56,7 @@ import { onMounted } from 'vue';
 const tracker = createFootprints();
 
 onMounted(() => {
-  tracker.track('page-view');
+  tracker.track('page_view');
 });
 </script>
 ```
@@ -67,7 +67,7 @@ onMounted(() => {
 <script>
   import { createFootprints } from 'journey-footprints';
   const tracker = createFootprints();
-  tracker.track('page-view');
+  tracker.track('page_view');
 </script>
 ```
 
@@ -188,7 +188,7 @@ yarn add journey-footprints
 <script src="https://unpkg.com/journey-footprints/dist/index.global.js"></script>
 <script>
   const tracker = JourneyFootprints.createFootprints({ user: '42' });
-  tracker.track('page-view');
+  tracker.track('page_view');
 </script>
 ```
 
@@ -200,7 +200,7 @@ yarn add journey-footprints
 import { createFootprints } from 'journey-footprints';
 
 const tracker = createFootprints({ user: '42' });
-tracker.track('page-view');
+tracker.track('page_view');
 ```
 
 ### Vue (API de Composição)
@@ -215,7 +215,7 @@ import { onMounted } from 'vue';
 const tracker = createFootprints();
 
 onMounted(() => {
-  tracker.track('page-view');
+  tracker.track('page_view');
 });
 </script>
 ```
@@ -226,7 +226,7 @@ onMounted(() => {
 <script>
   import { createFootprints } from 'journey-footprints';
   const tracker = createFootprints();
-  tracker.track('page-view');
+  tracker.track('page_view');
 </script>
 ```
 
@@ -347,7 +347,7 @@ yarn add journey-footprints
 <script src="https://unpkg.com/journey-footprints/dist/index.global.js"></script>
 <script>
   const tracker = JourneyFootprints.createFootprints({ user: '42' });
-  tracker.track('page-view');
+  tracker.track('page_view');
 </script>
 ```
 
@@ -359,7 +359,7 @@ yarn add journey-footprints
 import { createFootprints } from 'journey-footprints';
 
 const tracker = createFootprints({ user: '42' });
-tracker.track('page-view');
+tracker.track('page_view');
 ```
 
 #### Vue (API de composición)
@@ -374,7 +374,7 @@ import { onMounted } from 'vue';
 const tracker = createFootprints();
 
 onMounted(() => {
-  tracker.track('page-view');
+  tracker.track('page_view');
 });
 </script>
 ```
@@ -385,7 +385,7 @@ onMounted(() => {
 <script>
   import { createFootprints } from 'journey-footprints';
   const tracker = createFootprints();
-  tracker.track('page-view');
+  tracker.track('page_view');
 </script>
 ```
 
