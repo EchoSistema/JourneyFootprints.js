@@ -5,16 +5,20 @@
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-    "scripts": {
+  "scripts": {
     "build": "tsup src/index.ts --dts --format cjs,esm,iife --global-name JourneyFootprints",
     "prepublishOnly": "npm run build",
     "test": "node --test"
   },
-  "keywords": ["tracking", "utm", "session"],
+  "keywords": [
+    "tracking",
+    "utm",
+    "session"
+  ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "tsup": "^7.2.0",
+    "tsup": "^8.5.0",
     "typescript": "^5.2.0"
   }
 }

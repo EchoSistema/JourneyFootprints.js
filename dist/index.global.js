@@ -19,10 +19,10 @@ var JourneyFootprints = (() => {
   var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
   // src/index.ts
-  var src_exports = {};
-  __export(src_exports, {
+  var index_exports = {};
+  __export(index_exports, {
     createFootprints: () => createFootprints,
-    default: () => src_default
+    default: () => index_default
   });
   var DEFAULT_ENDPOINT = "https://micros.services/api/v1/footprints";
   function createFootprints(options = {}) {
@@ -41,8 +41,7 @@ var JourneyFootprints = (() => {
     const language = (_j = options.language) != null ? _j : getLanguage();
     async function track(event, data = {}) {
       var _a2;
-      if (!fetchFn)
-        return { ok: false, status: 0 };
+      if (!fetchFn) return { ok: false, status: 0 };
       const payload = { event, user, sessionId, language, utm, ...data };
       try {
         const res = await fetchFn(endpoint, {
@@ -51,8 +50,7 @@ var JourneyFootprints = (() => {
           body: JSON.stringify(payload)
         });
         const corr = (_a2 = res.headers) == null ? void 0 : _a2.get("X-Correlation-Id");
-        if (corr)
-          sessionId = corr;
+        if (corr) sessionId = corr;
         return { ok: res.ok, status: res.status };
       } catch (e) {
         return { ok: false, status: 0 };
@@ -72,15 +70,13 @@ var JourneyFootprints = (() => {
     };
   }
   function getQuery(key) {
-    if (typeof location === "undefined")
-      return "";
+    if (typeof location === "undefined") return "";
     return new URLSearchParams(location.search).get(key) || "";
   }
   function getLanguage() {
-    if (typeof navigator === "undefined")
-      return "";
+    if (typeof navigator === "undefined") return "";
     return navigator.language || "";
   }
-  var src_default = { createFootprints };
-  return __toCommonJS(src_exports);
+  var index_default = { createFootprints };
+  return __toCommonJS(index_exports);
 })();
