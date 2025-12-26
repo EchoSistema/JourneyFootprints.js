@@ -29,7 +29,7 @@ export interface Tracker {
   getSessionId(): string | null;
 }
 
-const DEFAULT_ENDPOINT = "https://micros.services/api/v1/footprints";
+const DEFAULT_ENDPOINT = "https://live.echosistema.online/api/v1/footprints";
 
 export function createFootprints(options: FootprintsOptions = {}): Tracker {
   const endpoint = options.endpoint ?? DEFAULT_ENDPOINT;
@@ -50,7 +50,25 @@ export function createFootprints(options: FootprintsOptions = {}): Tracker {
 
   async function track(event: string, data: Record<string, unknown> = {}): Promise<TrackResult> {
     if (!fetchFn) return { ok: false, status: 0 };
-    const payload = { event, user, sessionId, language, utm, ...data };
+    const payload = {
+      event,
+      eventTime: new Date().toISOString(),
+      page: getPage(),
+      referrer: getReferrer(),
+      title: getTitle(),
+      user,
+      sessionId,
+      language,
+      utm,
+      browser: getBrowser(),
+      os: getOS(),
+      device: getDevice(),
+      screen: getScreen(),
+      viewport: getViewport(),
+      timezoneOffset: getTimezoneOffset(),
+      clids: getClids(),
+      ...data
+    };
     try {
       const headers: Record<string, string> = { "Content-Type": "application/json" };
       if (publicKey) headers["X-PUBLIC-KEY"] = publicKey;
@@ -83,6 +101,139 @@ function getQuery(key: string): string {
 function getLanguage(): string {
   if (typeof navigator === "undefined") return "";
   return navigator.language || "";
+}
+
+function getPage(): string {
+  if (typeof location === "undefined") return "";
+  return location.pathname + location.search;
+}
+
+function getReferrer(): string {
+  if (typeof document === "undefined") return "";
+  return document.referrer || "";
+}
+
+function getTitle(): string {
+  if (typeof document === "undefined") return "";
+  return document.title || "";
+}
+
+function getBrowser(): { name: string; version: string } | null {
+  if (typeof navigator === "undefined") return null;
+  const ua = navigator.userAgent;
+  let name = "";
+  let version = "";
+
+  if (ua.includes("Firefox/")) {
+    name = "Firefox";
+    version = ua.match(/Firefox\/([\d.]+)/)?.[1] || "";
+  } else if (ua.includes("Edg/")) {
+    name = "Edge";
+    version = ua.match(/Edg\/([\d.]+)/)?.[1] || "";
+  } else if (ua.includes("Chrome/")) {
+    name = "Chrome";
+    version = ua.match(/Chrome\/([\d.]+)/)?.[1] || "";
+  } else if (ua.includes("Safari/") && !ua.includes("Chrome")) {
+    name = "Safari";
+    version = ua.match(/Version\/([\d.]+)/)?.[1] || "";
+  }
+
+  return name ? { name, version } : null;
+}
+
+function getOS(): { name: string; version: string } | null {
+  if (typeof navigator === "undefined") return null;
+  const ua = navigator.userAgent;
+  let name = "";
+  let version = "";
+
+  if (ua.includes("Windows")) {
+    name = "Windows";
+    const match = ua.match(/Windows NT ([\d.]+)/);
+    if (match) {
+      const ntVersion = match[1];
+      if (ntVersion === "10.0") version = "10/11";
+      else if (ntVersion === "6.3") version = "8.1";
+      else if (ntVersion === "6.2") version = "8";
+      else if (ntVersion === "6.1") version = "7";
+      else version = ntVersion;
+    }
+  } else if (ua.includes("Mac OS X")) {
+    name = "macOS";
+    version = ua.match(/Mac OS X ([\d_]+)/)?.[1]?.replace(/_/g, ".") || "";
+  } else if (ua.includes("Linux")) {
+    name = "Linux";
+  } else if (ua.includes("Android")) {
+    name = "Android";
+    version = ua.match(/Android ([\d.]+)/)?.[1] || "";
+  } else if (ua.includes("iPhone") || ua.includes("iPad")) {
+    name = "iOS";
+    version = ua.match(/OS ([\d_]+)/)?.[1]?.replace(/_/g, ".") || "";
+  }
+
+  return name ? { name, version } : null;
+}
+
+function getDevice(): { type: string; brand: string; model: string } | null {
+  if (typeof navigator === "undefined") return null;
+  const ua = navigator.userAgent;
+  let type = "desktop";
+  let brand = "";
+  let model = "";
+
+  if (/Mobi|Android/i.test(ua)) {
+    type = "mobile";
+  } else if (/Tablet|iPad/i.test(ua)) {
+    type = "tablet";
+  }
+
+  if (ua.includes("iPhone")) {
+    brand = "Apple";
+    model = "iPhone";
+  } else if (ua.includes("iPad")) {
+    brand = "Apple";
+    model = "iPad";
+  } else if (ua.includes("Macintosh")) {
+    brand = "Apple";
+    model = "Mac";
+  }
+
+  return { type, brand, model };
+}
+
+function getScreen(): { w: number; h: number; dpr: number } | null {
+  if (typeof screen === "undefined") return null;
+  return {
+    w: screen.width,
+    h: screen.height,
+    dpr: typeof devicePixelRatio !== "undefined" ? devicePixelRatio : 1
+  };
+}
+
+function getViewport(): { w: number; h: number } | null {
+  if (typeof window === "undefined") return null;
+  return {
+    w: window.innerWidth,
+    h: window.innerHeight
+  };
+}
+
+function getTimezoneOffset(): number {
+  return new Date().getTimezoneOffset();
+}
+
+function getClids(): Record<string, string> {
+  if (typeof location === "undefined") return {};
+  const params = new URLSearchParams(location.search);
+  const clids: Record<string, string> = {};
+  const clidKeys = ["gclid", "fbclid", "msclkid", "ttclid", "li_fat_id", "twclid", "dclid"];
+
+  for (const key of clidKeys) {
+    const value = params.get(key);
+    if (value) clids[key] = value;
+  }
+
+  return clids;
 }
 
 export default { createFootprints };
